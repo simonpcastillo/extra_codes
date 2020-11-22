@@ -4,8 +4,8 @@ import glob
 from datetime import date
 import openslide
 
-inputfolder = "E:/GBM/gdrive/2020/H&E" #"E:/GBM/OneDrive_1_02-11-2020"
-outputfolder = "C:/Users/tinyhp/Dropbox (ICR)/GBM_simon/GBM_Quezada"  #"E:/GBM/OneDrive_1_02-11-2020"
+inputfolder = ""
+outputfolder = ""  
 outputname = "metadata"
 
 #list files in inputfolder
