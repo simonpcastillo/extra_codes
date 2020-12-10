@@ -1,152 +1,74 @@
+@import "compass/css3";
+
+// gradient variable
+$topColor           : hsl(80, 32%, 47%);
+$bottomColor        : hsl(203, 47%, 18%);
+
+// bullet-proof gradients
+@mixin gradient( $top-gradient, $bottom-gradient) {
+  background: #cedce7; /* Old browsers */
+  background: -moz-linear-gradient(0deg, $top-gradient 0%, $bottom-gradient 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,$top-gradient), color-stop(100%,$bottom-gradient)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(0deg,  $top-gradient 0%, $bottom-gradient 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(0deg,  $top-gradient 0%, $bottom-gradient 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(0deg,  $top-gradient 0%, $bottom-gradient 100%); /* IE10+ */
+  background: linear-gradient(90deg,  $top-gradient 0%, $bottom-gradient 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#849e51', endColorstr='#193445',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+// easy browser prefixes
+@mixin prefix($property, $value) {
+  -webkit-#{$property}: $value;
+     -moz-#{$property}: $value;
+      -ms-#{$property}: $value;
+       -o-#{$property}: $value;
+          #{$property}: $value;
+}
+
+// fade-in animation (should make a mixin)
 @-moz-keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+
 @-webkit-keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+
 @keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-li:nth-child(1) {
-  -webkit-transform: translate(205px, 212px);
-  -moz-transform: translate(205px, 212px);
-  -ms-transform: translate(205px, 212px);
-  -o-transform: translate(205px, 212px);
-  transform: translate(205px, 212px);
-  -webkit-animation: fadein 1s 300ms 1 normal forwards;
-  -moz-animation: fadein 1s 300ms 1 normal forwards;
-  -ms-animation: fadein 1s 300ms 1 normal forwards;
-  -o-animation: fadein 1s 300ms 1 normal forwards;
-  animation: fadein 1s 300ms 1 normal forwards;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-li:nth-child(2) {
-  -webkit-transform: translate(75px, 212px);
-  -moz-transform: translate(75px, 212px);
-  -ms-transform: translate(75px, 212px);
-  -o-transform: translate(75px, 212px);
-  transform: translate(75px, 212px);
-  -webkit-animation: fadein 1s 600ms 1 normal forwards;
-  -moz-animation: fadein 1s 600ms 1 normal forwards;
-  -ms-animation: fadein 1s 600ms 1 normal forwards;
-  -o-animation: fadein 1s 600ms 1 normal forwards;
-  animation: fadein 1s 600ms 1 normal forwards;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-}
+// the number of points should match the number of elements in your markup
+$totalPoints: 6;
 
-li:nth-child(3) {
-  -webkit-transform: translate(10px, 100px);
-  -moz-transform: translate(10px, 100px);
-  -ms-transform: translate(10px, 100px);
-  -o-transform: translate(10px, 100px);
-  transform: translate(10px, 100px);
-  -webkit-animation: fadein 1s 900ms 1 normal forwards;
-  -moz-animation: fadein 1s 900ms 1 normal forwards;
-  -ms-animation: fadein 1s 900ms 1 normal forwards;
-  -o-animation: fadein 1s 900ms 1 normal forwards;
-  animation: fadein 1s 900ms 1 normal forwards;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-}
+// build the circle
+@for $i from 1 through $totalPoints {
+  // circle radius
+  $radius: 130;
+  // center x coordinate
+  $cx: 140;
+  // center y coordinate
+  $cy: 100;
+  // animation delay because Sass interpolation weirdness
+  $delay: ($i * 300) + ms;
 
-li:nth-child(4) {
-  -webkit-transform: translate(74px, -13px);
-  -moz-transform: translate(74px, -13px);
-  -ms-transform: translate(74px, -13px);
-  -o-transform: translate(74px, -13px);
-  transform: translate(74px, -13px);
-  -webkit-animation: fadein 1s 1200ms 1 normal forwards;
-  -moz-animation: fadein 1s 1200ms 1 normal forwards;
-  -ms-animation: fadein 1s 1200ms 1 normal forwards;
-  -o-animation: fadein 1s 1200ms 1 normal forwards;
-  animation: fadein 1s 1200ms 1 normal forwards;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-}
+  // set x and y coordinate of each circle
+  $x: floor($cx + $radius * cos( 2 * pi() * ($i / $totalPoints))); 
+  $y: floor($cy + $radius * sin( 2 * pi() * ($i / $totalPoints)));
 
-li:nth-child(5) {
-  -webkit-transform: translate(205px, -13px);
-  -moz-transform: translate(205px, -13px);
-  -ms-transform: translate(205px, -13px);
-  -o-transform: translate(205px, -13px);
-  transform: translate(205px, -13px);
-  -webkit-animation: fadein 1s 1500ms 1 normal forwards;
-  -moz-animation: fadein 1s 1500ms 1 normal forwards;
-  -ms-animation: fadein 1s 1500ms 1 normal forwards;
-  -o-animation: fadein 1s 1500ms 1 normal forwards;
-  animation: fadein 1s 1500ms 1 normal forwards;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-}
-
-li:nth-child(6) {
-  -webkit-transform: translate(270px, 99px);
-  -moz-transform: translate(270px, 99px);
-  -ms-transform: translate(270px, 99px);
-  -o-transform: translate(270px, 99px);
-  transform: translate(270px, 99px);
-  -webkit-animation: fadein 1s 1800ms 1 normal forwards;
-  -moz-animation: fadein 1s 1800ms 1 normal forwards;
-  -ms-animation: fadein 1s 1800ms 1 normal forwards;
-  -o-animation: fadein 1s 1800ms 1 normal forwards;
-  animation: fadein 1s 1800ms 1 normal forwards;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
+  // prettiness
+   li:nth-child( #{$i} ) {
+    @include prefix(transform, translate( $x + px, $y + px));
+    @include prefix(animation, fadein 1s $delay 1 normal forwards );
+    @include prefix(transition, opacity 1s);
+  } 
 }
 
 body {
-  background: #cedce7;
-  /* Old browsers */
-  background: -moz-linear-gradient(0deg, #859e51 0%, #183343 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #859e51), color-stop(100%, #183343));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(0deg, #859e51 0%, #183343 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(0deg, #859e51 0%, #183343 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(0deg, #859e51 0%, #183343 100%);
-  /* IE10+ */
-  background: linear-gradient(90deg, #859e51 0%, #183343 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#849e51', endColorstr='#193445',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */
+  @include gradient($topColor, $bottomColor);
 }
 
 div {
@@ -161,17 +83,13 @@ ul {
   margin: 0;
   width: 100%;
   list-style-type: none;
-}
-ul li {
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  -ms-border-radius: 40px;
-  -o-border-radius: 40px;
-  border-radius: 40px;
-  position: absolute;
-  display: block;
-  opacity: 0;
-  width: 2em;
-  height: 2em;
-  background: #FFF;
+  li {
+    @include prefix(border-radius, 40px );
+    position: absolute;
+    display: block;
+    opacity: 0;
+    width: 2em;
+    height: 2em;
+    background: #FFF;
+  }
 }
