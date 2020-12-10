@@ -1,13 +1,8 @@
-ul {
-    position: relative;
-    top: 200px; left: 200px; /*for example purposes only*/
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-li {
-    position: absolute;
-    -webkit-transition: all 2s linear;
-    -moz-transition: all 2s linear;
-    transition: all 2s linear;
-}
+body {
+    background-color: lightblue;
+  }
+  
+  tt2 {
+    color: navy;
+    margin-left: 50px;
+  }
