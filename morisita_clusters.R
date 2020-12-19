@@ -10,7 +10,7 @@ morisita_clusters <- function(df, types = c("n.C", "n.L"), unique.rm = TRUE){
   }
   
 
-  morisita_clusters <- dispindmorisita(data[,types])
+  morisita_clusters <- dispindmorisita(df[,types])
   
   return(morisita_clusters)
 }

@@ -11,8 +11,8 @@ diversity_clusters <- function(df, types = c("n.C", "n.L")){
   
   if(length(types) < 2 ){warning("if input dataframe have 1 sp, a global diversity is computed")}
   
-  H <- diversity(data[,types])
-  simp <- diversity(data[,types], "simpson")
+  H <- diversity(df[,types])
+  simp <- diversity(df[,types], "simpson")
   
   diversity_clusters <- data.frame(Shannon = H, Simpson = simp)
   
