@@ -36,7 +36,7 @@ spatialdata.coldness.WSI <- function(input.folder = input.folder, output.folder 
     g.cluster <- data.frame(nclusters = nrow(data1),
                             hotcluster =  nrow(data1[data1$coldness == "hot",]),
                             coldcluster =  nrow(data1[data1$coldness == "cold",]),
-                            depletedcluster =  nrow(data1[data1$coldness == "depleted",],
+                            depletedcluster =  nrow(data1[data1$coldness == "depleted",]),
                             hotcluster2 =  nrow(data1[data1$coldness2 == "hot",]),
                             coldcluster2 =  nrow(data1[data1$coldness2 == "cold",]),
                             depletedcluster2 =  nrow(data1[data1$coldness2 == "depleted",])
