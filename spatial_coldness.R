@@ -13,7 +13,7 @@ spatialdata.coldness.WSI <- function(input.folder = input.folder, output.folder 
     div0 <- diversity_clusters(df = data , types = c("n.C", "n.L"))
     data0 <- cbind(data, div0)
     data1 <- data0[data0$cluster != 0, ]
-    
+    data1$LC <- data1$n.L/data1.n.C
     data1$coldness <- NA
     medL <- median(data1[data1$n.L>0,]$n.L)
    
@@ -21,6 +21,12 @@ spatialdata.coldness.WSI <- function(input.folder = input.folder, output.folder 
      if(data1$n.L[l]< medL){data1$coldness[l] <- "cold"}
      if(data1$n.L[l]>= medL){data1$coldness[l] <- "hot"}
      if(data1$n.L[l] == 0){data1$coldness[l] <- "depleted"}
+   }
+
+     for(l in 1:nrow(data1)){
+     if(data1$LC[l] < 1 & data1$LC[l] >0){data1$coldness2[l] <- "cold"}
+     if(data1$LC[l]>= 1){data1$coldness2[l] <- "hot"}
+     if(data1$LC[l] == 0){data1$coldness2[l] <- "depleted"}
    }
     
     
@@ -30,7 +36,10 @@ spatialdata.coldness.WSI <- function(input.folder = input.folder, output.folder 
     g.cluster <- data.frame(nclusters = nrow(data1),
                             hotcluster =  nrow(data1[data1$coldness == "hot",]),
                             coldcluster =  nrow(data1[data1$coldness == "cold",]),
-                            depletedcluster =  nrow(data1[data1$coldness == "depleted",])
+                            depletedcluster =  nrow(data1[data1$coldness == "depleted",],
+                            hotcluster2 =  nrow(data1[data1$coldness2 == "hot",]),
+                            coldcluster2 =  nrow(data1[data1$coldness2 == "cold",]),
+                            depletedcluster2 =  nrow(data1[data1$coldness2 == "depleted",])
                             
                         )
 
