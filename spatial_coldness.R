@@ -13,7 +13,7 @@ spatialdata.coldness.WSI <- function(input.folder = input.folder, output.folder 
     div0 <- diversity_clusters(df = data , types = c("n.C", "n.L"))
     data0 <- cbind(data, div0)
     data1 <- data0[data0$cluster != 0, ]
-    data1$LC <- data1$n.L/data1.n.C
+    data1$LC <- data1$n.L/data1$n.C
     data1$coldness <- NA
     medL <- median(data1[data1$n.L>0,]$n.L)
    
