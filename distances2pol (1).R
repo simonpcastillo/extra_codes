@@ -1,11 +1,17 @@
-distances2chull<-function(x,y){
+distances2pol<-function(df0, dfpol){
   
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(grDevices)
-
-  dfx<-data.frame(x=x, y=y)
-  chu<-chull(dfx$x, dfx$y)
+  "%ni%" <- Negate("%in%")
+  if(colnames(df0) %ni% c("x", "y"))stop("no x or y in df0")
+  if(colnames(dfpol) %ni% c("x", "y"))stop("no x or y in dfpol")
+  
+  dfx<-df0
+  
+  chu<-dfpol#chull(dfx$x, dfx$y)
+  
   cuh<-c(chu, chu[1])
+  
   ver<-dfx[cuh,]
   
   for(n in 1:nrow(ver)){
@@ -50,8 +56,8 @@ distances2chull<-function(x,y){
       
       if(xint <= min(ver[j,c("x", "x2")]) & yint >= min(ver[j,c("y", "y2")])){
         x_int[i,j] <-min(ver[j,c("x", "x2")]); y_int[i,j] <-max(ver[j,c("y", "y2")])}
-
-
+      
+      
       
       distances[i,j] = sqrt((x_int[i,j]-dfx$x[i])^2+(y_int[i,j]-dfx$y[i])^2 )
       
